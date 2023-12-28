@@ -23,7 +23,7 @@ play()
 # (podés trackearlo en Notion, Github, o donde te sea cómodo).
 
 # Bonus 1
-# Mismo ejercicio, pero solo tiene 5 oportunidades, si el usuario usa las 5 poner un cartel "Perdiste, intenta de nuevo!" o algo asi y salir.
+# Mismo ejercicio, pero el usuario solo tiene 5 oportunidades, si usa las 5 poner un cartel "Perdiste, intenta de nuevo!" o algo asi y salir.
 
 # Bonus 2
 # Mostrar al final todas las adivinanzas fallidas del usuario (tal vez haya alguna estructura de datos que nos pueda servir para esto? 🤔)
