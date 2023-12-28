@@ -1,5 +1,6 @@
 import unittest
 
+# from list_comprehension_solved import filter_products, by_price_gt, total_price, average_price
 from list_comprehension import filter_products, by_price_gt, total_price, average_price
 
 def make_products():
