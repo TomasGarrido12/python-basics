@@ -1,3 +1,5 @@
+# Para una intro del tema ver el archivo lists/intro.py
+
 products = [
     {id: "1", "name": "Wireless Earbuds", "description": "High-quality sound with noise cancellation feature", "price": 30 },
     {id: "2", "name": "Smartwatch", "description": "Fitness tracking and smartphone notifications", "price": 77 },
@@ -10,6 +12,8 @@ products = [
     {id: "9", "name": "Fitness Tracker", "description": "Monitors health and activity metrics", "price": 300 },
     {id: "10", "name": "Digital Camera", "description": "High-resolution photos with easy connectivity", "price": 120 }
 ]
+
+# Desafíos
 
 ## Escribamos una funcion que filtre productos cuyo precio (price) sea mayor a n
 def filter_products():
