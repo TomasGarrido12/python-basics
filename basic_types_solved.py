@@ -29,3 +29,5 @@ play()
 # Bonus
 
 # Se podría decir que hay más de un bug en este programa, por ejemplo si ingresamos un string en lugar de un numero, como se puede solucionar?
+# Se puede condicionar al input para que, luego de haber tomado el valor del usuario, valide si es o no un entero (con la funcion isdigit()). En caso de que no sea un entero
+# se le vuelve a pedir que ingrese nuevamente un valor
