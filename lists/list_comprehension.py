@@ -1,4 +1,8 @@
 # Para una intro del tema ver el archivo lists/intro.py
+# Sintaxis del List Comprehension newlist = [expression for item in iterable if condition == True]
+# Sintaxis reduce() reduce(function, sequence[, initial])
+
+from functools import reduce
 
 products = [
     {id: "1", "name": "Wireless Earbuds", "description": "High-quality sound with noise cancellation feature", "price": 30 },
@@ -16,46 +20,36 @@ products = [
 # Desafíos
 
 ## Escribamos una funcion que filtre productos cuyo precio (price) sea mayor a n
-#Tomo n como 100
-
-#No se porque no filtra el producto que tiene un price de 120. En el FOR no llega hasta ese producto
-
-lista_primer_desafio = products.copy()
-
 def filter_products(lista_primer_desafio):
-    contador = 0  #me creo esta variable para tomarla como indice
-    for producto in lista_primer_desafio:
-        print(f"Se esta analizando el siguiente producto y precio: {producto['name'], producto['price']}")
-        if producto['price'] > 100:
-            del lista_primer_desafio[contador]
-            contador+=1
-        else:
-            contador+=1
-    return lista_primer_desafio
+    return [x for x in lista_primer_desafio if x['price'] > 100]
 
-productos_baratos = filter_products(lista_primer_desafio)
-
-def cheap_products(productos_baratos):
-    for producto in productos_baratos:
-        print(f"Este producto tiene un valor igual o menor a 100: {producto['name'], producto['price']}")
-
-cheap_products(productos_baratos)
+productos_caros = filter_products(products)
+print(productos_caros)
 
 ## Una funcion que devuelva el precio del total de productos
-lista_segundo_desafio = products.copy()
+def total_price(valorA,valorB):
+    return valorA + valorB
 
-def total_price(lista_segundo_desafio):
-    precio_total = 0
-    for precio in lista_segundo_desafio:
-        precio_total += precio['price']  
-    return precio_total
-
-precio_total = total_price(lista_segundo_desafio)
-print(f"El precio acumulado es: ${precio_total} peronios")
+precio_total = reduce(total_price,[product['price'] for product in products])
+print(f"El precio total de los productos es: ${precio_total}")
 
 ## Una funcion que devuelva el precio promedio de productos
-def average_price(precio_total):
-    cantidad_elementos = len(lista_segundo_desafio)
-    print(f"El precio promedio de los productos es: ${precio_total/cantidad_elementos} peronios")
+def average_price(products):
+    return print(f"El precio promedio de los productos es: ${precio_total/len(products)}")
 
-average_price(precio_total)
+average_price(products)
+
+
+
+
+
+
+    #contador = 0  #me creo esta variable para tomarla como indice
+    #for producto in lista_primer_desafio:
+    #    print(f"Se esta analizando el siguiente producto y precio: {producto['name'], producto['price']}")
+    #    if producto['price'] > 100:
+    #        del lista_primer_desafio[contador]
+    #        contador+=1
+    #    else:
+    #        contador+=1
+    #return lista_primer_desafio
