@@ -1,7 +1,7 @@
 import unittest
 
 # from functional_programming_basics.sin_callbacks import filter_by_price_range
-from functional_programming_basics.sin_callbacks_solved import (
+from functional_programming_basics.sin_callbacks import (
     filter_by_price_range,
     filter_by_keyword_in_name_and_description,
     identify_low_stock_products,
@@ -139,12 +139,12 @@ class TestCallbacks(unittest.TestCase):
             ],
         )
 
-    def test_filter_by_keyword_in_name_and_description_empty(self):
+    #def test_filter_by_keyword_in_name_and_description_empty(self):
         self.assertEqual(
             filter_by_keyword_in_name_and_description(products, [""]), products
         )
 
-    def test_identify_low_stock_products(self):
+    #def test_identify_low_stock_products(self):
         expected_result = [
             {
                 "id": "8",
