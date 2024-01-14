@@ -12,5 +12,15 @@ Uso y recomiendo Visual Studio Code, e instalar el plugin de python, el cual el 
 
 - Tipos basicos en `basic_types.py`
 - Listas en `list_comprehension.py`
-- OOP _
-- Flask _
+- OOP \_
+- Flask \_
+
+## Ejercicios
+
+Para correr los tests que indican que el ejercicio esta bien hecho, correr:
+
+```bash
+python3 -m unittest # o puede ser `python -m unittest`, este comando corre todos los tests
+# o
+python3 -m unittest dictionaries/test_exercise.py # para uno especifico
+```
