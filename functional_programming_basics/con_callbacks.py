@@ -81,12 +81,13 @@ products = [
     },
 ]
 
+
 # Esta función general se utiliza para filtrar una lista de productos
 # según un criterio definido en la función callback.
 # - products: Lista de productos a filtrar.
 # - callback: Función que define el criterio de filtrado.
 def filter_by(product, callback):
-    return[p for p in product if callback(p)]
+    return [p for p in product if callback(p)]
 
 
 # Esta función retorna un callback para filtrar productos por rango de precio.
@@ -95,7 +96,11 @@ def filter_by(product, callback):
 # La función retornada debe tomar un producto como argumento y devolver True
 # si el precio del producto está dentro del rango especificado.
 def is_in_price_range(min_price, max_price):
-    return lambda product: True if product['price'] > min_price and product['price'] < max_price else False
+    return (
+        lambda product: True
+        if product["price"] > min_price and product["price"] < max_price
+        else False
+    )
 
 
 # Esta función retorna un callback para filtrar productos por palabras clave
@@ -104,26 +109,31 @@ def is_in_price_range(min_price, max_price):
 # La función retornada debe tomar un producto como argumento y devolver True
 # si todas las palabras clave están presentes tanto en el título como en
 # la descripción del producto.
-def contains_keywords(keywords): 
-    return lambda product: True if keywords in product['name'] or keywords in product['description'] else False
+def contains_keywords(keywords):
+    return (
+        lambda product: True
+        if keywords in product["name"] or keywords in product["description"]
+        else False
+    )
 
-                        #Esta solución solo aplica si la keywords es una sola palabra, es decir, no contempla una lista de keywords
+    # Esta solución solo aplica si la keywords es una sola palabra, es decir, no contempla una lista de keywords
+
 
 # Esta función retorna un callback para identificar productos con bajo stock.
 # - stock_threshold: Umbral de stock por debajo del cual se considera bajo stock.
 # La función retornada debe tomar un producto como argumento y devolver True
 # si la cantidad de stock del producto está por debajo del umbral especificado.
 def is_below_stock_threshold(stock_threshold):
-    return lambda product: True if product['stock'] < stock_threshold else False
+    return lambda product: True if product["stock"] < stock_threshold else False
 
-
-# Ejemplo de uso:
-# products = [...]
+    # Ejemplo de uso:
+    # products = [...]
     filtered_products = filter_by(products, is_in_price_range(10, 50))
 
-    filtered_products = filter_by(products,contains_keywords("Bluetooth"))
+    filtered_products = filter_by(products, contains_keywords("Bluetooth"))
 
-    filtered_products = filter_by(products,is_below_stock_threshold(35))
+    filtered_products = filter_by(products, is_below_stock_threshold(35))
+
 
 # BONUS! 🌶️🌶️🌶️
 # Combinando filtros
@@ -135,13 +145,11 @@ def is_below_stock_threshold(stock_threshold):
 # Un ejemplo de como permitir una cantidad variable de argumentos es:
 
 
-def my_function(someArg, *variableArgs):
-    print(f"This is a simple arg {someArg}")
-    for arg in variableArgs:
-        print(arg)
+# def my_function(someArg, *variableArgs):
+#     raise
 
 
-my_function(1, 2, 3, "a", "b")
+# my_function(1, 2, 3, "a", "b")
 
 # Output:
 # This is a simple arg 1
@@ -155,11 +163,66 @@ my_function(1, 2, 3, "a", "b")
 # Cada callback representa un criterio de filtrado diferente.
 # Un producto debe cumplir con todos los criterios de los callbacks para ser incluido en la lista final.
 def filter_products(products, *callbacks):
-    for p in products:
-        print(p)
-        for cb in callbacks:
-            
+    filtrados = []
 
-    filtered_products = filter_products(products, is_in_price_range(40, 80))
+    for prod in products:
+        matches_all_criteria = True
+        for callback in callbacks:
+            if not callback(prod):
+                matches_all_criteria = False
+                break
+        if matches_all_criteria:
+            filtrados.append(prod)
+
+    return filtrados
+
+
+def foo():
+    print("foo!")
+
+
+def bar():
+    print("bar!")
+
+
+lista = [foo, bar]
+
+for fn in lista:
+    print(fn())
 
 # Ejemplo: `filtered_products = filter_products(products, filter_by_price_range(40, 80), identify_low_stock_products(30))`
+
+# Higher order function (funciones que reciben funciones como parametro)
+# Callbacks son funciones que son pasadas a otra funcion como parametro (callback)
+# Funciones en python pueden ser tratadas como cualquier otro valor, podemos retornar una funcion dentro de otra funcion(first class citizen)
+
+
+products2 = [
+    {
+        "id": "1",
+        "name": "Wireless Earbuds",
+        "description": "High-quality sound with noise cancellation feature",
+        "price": 30,
+        "category": "Electronics",
+        "stock": 30,
+    },
+    {
+        "id": "2",
+        "name": "Bluetooth Speaker",
+        "description": "Portable and waterproof speaker with deep bass",
+        "price": 50,
+        "category": "Electronics",
+        "stock": 70,
+    },
+]
+
+
+def identify_low_stock_products(stock):
+    return lambda prod: prod["stock"] < stock
+
+
+filtered_products = filter_products(
+    products2, is_in_price_range(40, 80), identify_low_stock_products(60)
+)
+
+print(filtered_products)
